@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     systemd \
     nginx \
     expect \
-    python3 \ 
+    python3 \
     dropbear \
     ufw \
     && apt-get clean \
@@ -32,10 +32,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Expose the container's ports to requests from the host machine.
 
-EXPOSE 22 80-9000
+EXPOSE 22 80 3000 8000
 
 # Allow the nginx web server to run.
 
+# RUN sudo ufw enable
+# RUN ssudo ufw status verbose
+# RUN sudo ufw logging on
 # RUN sudo ufw allow 'Nginx HTTP'
 
-CMD [ "/bin/bash" ]
+# CMD [ "/bin/bash" ]
+
+# ! TODO
+# * 1. script to set up ufw
+# * 2. find where logs are
+# * 3. automate process with docker build
+# * 4. 
