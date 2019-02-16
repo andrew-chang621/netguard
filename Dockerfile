@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     systemd \
     nginx \
     expect \
+    python3 \ 
     dropbear \
     ufw \
     && apt-get clean \
