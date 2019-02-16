@@ -1,0 +1,15 @@
+version: "3"
+services:
+  deice-daemon:
+    build: ./device-daemon
+    ports:
+      - "3000:22"
+      - "4000:80"
+      - "5000:3000"
+      - "6000:8000"
+    # name: "device-daemon"
+    environment:
+      - NOTIFICATIONS_ENDPOINT=XXXXX
+      - NOTIFICATIONS_API_KEY
+    volumes:
+      - /sms-notifications:/sms-notifications

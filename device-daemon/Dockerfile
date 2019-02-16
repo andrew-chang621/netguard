@@ -48,3 +48,5 @@ EXPOSE 22 80 3000 8000
 # * 2. find where logs are
 # * 3. automate process with docker build
 # * 4.
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]`
