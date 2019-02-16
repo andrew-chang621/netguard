@@ -1,6 +1,11 @@
 from flask import Flask, jsonify, request
+import authentication
 
+# Initialize the Flask App
 app = Flask(__name__)
+
+# Add authentication middleware
+app.wsgi_app = authentication.AuthenticationMiddleWare(app.wsgi_app)
 
 
 @app.route("/", methods=["GET"])
@@ -12,8 +17,8 @@ def get_messages():
     """
 
     return jsonify(
-            code="200",
-            message="Hello, World.",)
+        code="200",
+        message="Hello, World.",)
 
 
 @app.route("/", methods=["POST"])
@@ -25,8 +30,8 @@ def send_message():
     """
 
     return jsonify(
-            code="200",
-            message="Hello, World.",)
+        code="200",
+        message="Hello, World.",)
 
 
 if __name__ == "__main__":
