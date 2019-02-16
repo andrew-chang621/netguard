@@ -1,5 +1,5 @@
 build-docker:
-	docker build -t treehacks-project .
+	docker build -t treehacks-project ./device-daemon
 
 run-docker:
 	docker rm -f $(docker ps -aq)

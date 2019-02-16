@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 # Create a new project directory inside the container and copy the local project files into it.
 
 WORKDIR /device-daemon
-COPY ./device-daemon .
+COPY ./ ./
 
 # Install project packages. Add any new ones to this list.
 
@@ -47,4 +47,4 @@ EXPOSE 22 80 3000 8000
 # * 1. script to set up ufw
 # * 2. find where logs are
 # * 3. automate process with docker build
-# * 4. 
+# * 4.
