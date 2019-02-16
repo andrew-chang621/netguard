@@ -2,12 +2,14 @@ FROM python:3.6.5-alpine3.7
 
 RUN apk update && apk add sudo
 
-COPY requirements.txt template/requirements.txt
+WORKDIR /sms-notifications
 
-RUN pip install -r template/requirements.txt
+COPY ./requirements.txt .
 
-COPY . /sms-notifications
+RUN pip install -r requirements.txt
 
-EXPOSE 300
+COPY ./ ./
 
-CMD ["python", "-u", "api.py"]
+EXPOSE 5000
+
+CMD ["python", "-u", "app.py"]
