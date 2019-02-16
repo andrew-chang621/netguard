@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import authentication
+import texting
 
 # Initialize the Flask App
 app = Flask(__name__)
@@ -28,11 +29,8 @@ def send_message():
     Returns:
         [RETURN TYPE] -- [DESC]
     """
-
-    return jsonify(
-        code="200",
-        message="Hello, World.",)
-
+    xf = request.get_json()
+    texting.send_text("+17608778720", "+15012323138", xf["destination"])
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
