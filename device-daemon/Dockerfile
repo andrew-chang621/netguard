@@ -49,4 +49,6 @@ EXPOSE 22 80 3000 8000
 # * 3. automate process with docker build
 # * 4.
 
+# This command keeps the container running untill it's explicitly terminated.
+
 ENTRYPOINT ["tail", "-f", "/dev/null"]`
