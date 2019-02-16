@@ -12,4 +12,14 @@ services:
       - NOTIFICATIONS_ENDPOINT=XXXXX
       - NOTIFICATIONS_API_KEY
     volumes:
-      - /sms-notifications:/sms-notifications
+      - ./device-daemon:/device-daemon
+
+  notifications-service:
+    build: ./sms-notifications
+    ports:
+      - "7000:5000"
+    volumes:
+      - ./sms-notifications:/sms-notifications
+    environment:
+      - TWILIO_ACCOUNT_SID
+      - TWILIO_AUTH_TOKEN
