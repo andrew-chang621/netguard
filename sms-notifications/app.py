@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+import remoteit
 import authentication
 import texting
 
@@ -19,7 +20,7 @@ def get_messages():
 
     return jsonify(
         code="200",
-        message="Hello, World.",)
+        message=remoteit.get_ssh_url())
 
 
 @app.route("/", methods=["POST"])

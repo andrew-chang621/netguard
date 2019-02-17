@@ -30,4 +30,19 @@ def get_auth_token() -> str:
 
 def get_ssh_url() -> str:
 
-    pass
+    headers = {
+        "developerkey": os.environ["REMOTEIT_DEVELOPER_KEY"],
+        "token": get_auth_token(),
+    }
+    body = {
+        "deviceaddress": os.environ["REMOTEIT_DEVICE_ADDRESS"]
+    }
+
+    url = "https://api.remot3.it/apv/v27/device/connect"
+
+    response = requests.post(url, data=json.dumps(body), headers=headers)
+    response_body = response.json()
+    split = response_body["connection"]["proxy"].split("http://")[1]
+    ssh_url = "ssh -l pi " + split.split(":")[0] + " -p " + split.split(":")[1]
+
+    return ssh_url
