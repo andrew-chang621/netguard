@@ -1,6 +1,7 @@
 import sys
 import os
 import time
+import json
 import logging
 import ufw_parse
 import requests
@@ -10,13 +11,13 @@ from watchdog.utils.dirsnapshot import DirectorySnapshotDiff, DirectorySnapshot
 
 PATH_TO_DIR = "/var/log"
 FILENAME = "messages"
-API_URL = "____"
+API_URL = "https://iot-alerts-service.azurewebsites.net/"
 
 def countLines(path):
     return sum(1 for line in open(path))
 
-def sendCallsToAPI(data):
-    requests.post(url=API_URL, params=data)
+def sendCallsToAPI(line):
+    requests.post(url=API_URL, json=line)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
@@ -41,14 +42,14 @@ if __name__ == "__main__":
                         print(":::::::::::::::::::WARNING:ATTACK DETECTED:::::::::::::::::")
                         print("Shutting down all ports...")
                         os.system("sudo ufw default deny incoming")
-                        last_call = temp[-1]
+                        last_call = [temp[-1]]
                         formatted = ufw_parse.format_log_data(last_call)
-                        # sendCallsToAPI({
-                        #     "hostIP": formatted[0]["SRC"],
-                        #     "sampleLog": formatted[0]
-                        # })
-                        print(formatted[0]["SRC"])
-                        print(formatted[0])
+                        sendCallsToAPI({
+                            "hostIP": "172.20.10.4",
+                            "sampleLog": formatted
+                        })
+                        # print(formatted["SRC"])
+                        print(formatted)
                         sys.exit("Closing run.py.")
                     file_lines = temp
             snapshot = DirectorySnapshot(PATH_TO_DIR, recursive=True)

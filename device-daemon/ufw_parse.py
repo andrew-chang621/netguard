@@ -31,7 +31,7 @@ def format_log_data(testLine):
 
         formatted_logs.append(new_data)
 
-    print(formatted_logs)
+    return(formatted_logs[0])
 
 
 if __name__ == "__main__":
