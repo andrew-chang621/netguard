@@ -15,7 +15,7 @@ services:
     volumes:
       - ./device-daemon:/device-daemon
 
-  notifications-service:
+  alerts-service:
     container_name: notifications-service-container
     build: ./sms-notifications
     ports:
@@ -25,3 +25,7 @@ services:
     environment:
       - TWILIO_ACCOUNT_SID
       - TWILIO_AUTH_TOKEN
+      - REMOTEIT_PASSWORD
+      - REMOTEIT_USERNAME
+      - REMOTEIT_DEVELOPER_KEY
+      - REMOTEIT_DEVICE_ADDRESS
