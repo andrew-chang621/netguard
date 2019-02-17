@@ -20,6 +20,16 @@ def sendCallsToAPI(line):
     requests.post(url=API_URL, json=line)
 
 if __name__ == "__main__":
+    print("""\
+            o    o .oPYo. ooooo .oPYo. o    o      .oo  .oPYo. ooo.   
+            8b   8 8.       8   8    8 8    8     .P 8  8   `8 8  `8. 
+            8`b  8 `boo     8   8      8    8    .P  8 o8YooP' 8   `8 
+            8 `b 8 .P       8   8   oo 8    8   oPooo8  8   `b 8    8 
+            8  `b8 8        8   8    8 8    8  .P    8  8    8 8   .P 
+            8   `8 `YooP'   8   `YooP8 `YooP' .P     8  8    8 8ooo'  
+            ..:::..:.....:::..:::....8 :.....:..:::::..:..:::.......::
+            :::::::::::::::::::::::::8 :::::::::::::::::::::::::::::::
+            :::::::::::::::::::::::::..:::::::::::::::::::::::::::::::""")
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S')
