@@ -29,6 +29,12 @@ def get_auth_token() -> str:
 
 
 def get_ssh_url() -> str:
+    """
+    Makes a request to the remote.it API to generate a proxy connection to the RPI.
+
+    Returns:
+        str: The SSH command to connect to the instance.
+    """
 
     headers = {
         "developerkey": os.environ["REMOTEIT_DEVELOPER_KEY"],
