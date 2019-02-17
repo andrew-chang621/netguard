@@ -14,7 +14,7 @@ def format_log_data(testLine):
 
     for line in testLine:
         new_data = {}
-        # new_data["date"] = line.split(" raspberrypi")[0]
+        new_data["date"] = line.split(" raspberrypi")[0]
         line = line.split(" ")
 
         # print(line)
