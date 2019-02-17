@@ -3,6 +3,7 @@ services:
   device-daemon:
     container_name: iot-device-daemon-container
     build: ./device-daemon
+    privileged: true
     ports:
       - "3000:22"
       - "4000:80"
