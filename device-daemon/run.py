@@ -7,8 +7,8 @@ from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
 from watchdog.utils.dirsnapshot import DirectorySnapshotDiff, DirectorySnapshot
 
-PATH_TO_DIR = "###"
-FILENAME = "###"
+PATH_TO_DIR = "/var/log"
+FILENAME = "messages"
 
 def countLines(path):
     return sum(1 for line in open(path))
@@ -31,8 +31,8 @@ if __name__ == "__main__":
                 print(i)
                 if i == PATH_TO_DIR + "/" + FILENAME:
                     temp = open(PATH_TO_DIR + "/" + FILENAME).readlines()
-                    print(temp.length - file_lines.length)
-                    if temp.length - file_lines.length > 10:
+                    print(len(temp) - len(file_lines))
+                    if len(temp) - len(file_lines) > 10:
                         print(":::::::::::::::::::WARNING:ATTACK DETECTED:::::::::::::::::")
                         print("Shutting down all ports...")
                         os.system("sudo ufw default deny incoming")

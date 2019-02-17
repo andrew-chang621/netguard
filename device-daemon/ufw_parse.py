@@ -1,4 +1,4 @@
-def format_log_data(recent_network_calls) -> list:
+def format_log_data(recent_network_calls):
     """
     Takes in a log file ufw log file as an input and
     formats it into a Python dictionary.
