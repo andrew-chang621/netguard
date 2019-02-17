@@ -3,15 +3,20 @@ import os
 import time
 import logging
 import ufw_parse
+import requests
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
 from watchdog.utils.dirsnapshot import DirectorySnapshotDiff, DirectorySnapshot
 
 PATH_TO_DIR = "/var/log"
 FILENAME = "messages"
+API_URL = "____"
 
 def countLines(path):
     return sum(1 for line in open(path))
+
+def sendCallsToAPI(data):
+    requests.post(url=API_URL, params=data)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
@@ -38,7 +43,8 @@ if __name__ == "__main__":
                         os.system("sudo ufw default deny incoming")
                         last_10 = temp[-10:]
                         formatted_calls = ufw_parse.format_log_data(last_10)
-                        print(formatted_calls)
+                        sendCallsToAPI({"results": formatted_calls})
+                        sys.exit("Closing run.py.")
                     file_lines = temp
             snapshot = DirectorySnapshot(PATH_TO_DIR, recursive=True)
             time.sleep(1)
