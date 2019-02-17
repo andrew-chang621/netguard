@@ -1,6 +1,8 @@
 import sys
+import os
 import time
 import logging
+import ufw_parse
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
 from watchdog.utils.dirsnapshot import DirectorySnapshotDiff, DirectorySnapshot
@@ -15,7 +17,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S')
-    line_count = countLines(PATH_TO_DIR + "/" + FILENAME)
+    file_lines = open(PATH_TO_DIR + "/" + FILENAME).readlines()
     snapshot = DirectorySnapshot(PATH_TO_DIR, recursive=True)
     event_handler = LoggingEventHandler()
     observer = Observer()
@@ -28,9 +30,16 @@ if __name__ == "__main__":
             for i in g.files_modified:
                 print(i)
                 if i == PATH_TO_DIR + "/" + FILENAME:
-                    temp = countLines(PATH_TO_DIR + "/" + FILENAME)
-                    print(temp - line_count)
-                    line_count = temp
+                    temp = open(PATH_TO_DIR + "/" + FILENAME).readlines()
+                    print(temp.length - file_lines.length)
+                    if temp.length - file_lines.length > 10:
+                        print(":::::::::::::::::::WARNING:ATTACK DETECTED:::::::::::::::::")
+                        print("Shutting down all ports...")
+                        os.system("sudo ufw default deny incoming")
+                        last_10 = temp[-10:]
+                        formatted_calls = ufw_parse.format_log_data(last_10)
+                        print(formatted_calls)
+                    file_lines = temp
             snapshot = DirectorySnapshot(PATH_TO_DIR, recursive=True)
             time.sleep(1)
     except KeyboardInterrupt:
