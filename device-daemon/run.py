@@ -41,9 +41,14 @@ if __name__ == "__main__":
                         print(":::::::::::::::::::WARNING:ATTACK DETECTED:::::::::::::::::")
                         print("Shutting down all ports...")
                         os.system("sudo ufw default deny incoming")
-                        last_10 = temp[-10:]
-                        formatted_calls = ufw_parse.format_log_data(last_10)
-                        sendCallsToAPI({"results": formatted_calls})
+                        last_call = temp[-1]
+                        formatted = ufw_parse.format_log_data(last_call)
+                        sendCallsToAPI({
+                            "hostIP": formatted["SRC"],
+                            "sampleLog": formatted[0]
+                        })
+                        print(formatted["SRC"])
+                        print(formatted[0])
                         sys.exit("Closing run.py.")
                     file_lines = temp
             snapshot = DirectorySnapshot(PATH_TO_DIR, recursive=True)
