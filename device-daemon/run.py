@@ -43,11 +43,11 @@ if __name__ == "__main__":
                         os.system("sudo ufw default deny incoming")
                         last_call = temp[-1]
                         formatted = ufw_parse.format_log_data(last_call)
-                        sendCallsToAPI({
-                            "hostIP": formatted["SRC"],
-                            "sampleLog": formatted[0]
-                        })
-                        print(formatted["SRC"])
+                        # sendCallsToAPI({
+                        #     "hostIP": formatted[0]["SRC"],
+                        #     "sampleLog": formatted[0]
+                        # })
+                        print(formatted[0]["SRC"])
                         print(formatted[0])
                         sys.exit("Closing run.py.")
                     file_lines = temp
